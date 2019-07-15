@@ -32,7 +32,7 @@
 
 <body>
     <div class="fixed-bottom mb-4">
-        <a href="https://web.whatsapp.com/send?phone=6281380030690" style="width: 70px;height: 70px;"><img src="<?= base_url('') ?>assets/img/e-commerce/WA.png" style="width: 70px;height: 70px;padding: 15px;"></a>
+        <a href="https://web.whatsapp.com/send?phone=6281380030690" style="width: 70px;height: 70px;"><img src="<?= base_url('') ?>assets/img/e-commerce/wa.png" style="width: 70px;height: 70px;padding: 15px;"></a>
     </div>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top shadow-lg clean-navbar" style="background-image: url(&quot;<?= base_url('') ?>assets/img/navbar/gambar-background-kayu-hd.jpg&quot;);">
         <div class="container">
