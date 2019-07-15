@@ -1,36 +1,26 @@
-    <footer class="page-footer dark" style="background-image: url(&quot;<?= base_url('') ?>assets/img/navbar/gambar-background-kayu-hd.jpg&quot;);">
-        <div class="container">
-            <div class="row" style="color: rgb(255,255,255);">
-                <div class="col">
-                    <h1 style="color: rgb(255,255,255);font-size: 22px;">Quick Links</h1>
-                    <hr>
-                    <ul>
-                        <li><a href="<?= base_url('home/contactUs') ?>">Hubungi Kami</a></li>
-                        <li><a href="<?= base_url('home/about') ?>">About</a></li>
-                        <li><a href="<?= base_url('home/client') ?>">Client</a></li>
-                    </ul>
-                </div>
-                <div class="col">
-                    <h1 style="color: rgb(255,255,255);font-size: 22px;">Visi &amp; Misi</h1>
-                    <hr>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.<br></p>
-                </div>
-                <div class="col">
-                    <h1 style="color: rgb(255,255,255);font-size: 22px;">Hubungi Kami</h1>
-                    <hr>
-                    <p>CV. Karya Xylo Abadi adalah perusahaan yang bergerak di bidang furniture yang dapat membantu anda mewujudkan design furniture yang anda harapkan , Setiap produk kami buat sendiri dengan penuh ketelitian, demi menjamin kualitas , sesuai
-                        dengan moto kami “ Make You’re design come true” .<br></p>
-                    <div><i class="fa fa-phone float-left" style="font-size: 22px;height: 24px;margin-right: 20px;width: 24.75px;"></i>
-                        <p>0251-8414-950<br></p>
-                    </div>
-                    <div><i class="fas fa-mail-bulk float-left" style="font-size: 22px;height: 24px;margin-right: 20px;"></i>
-                        <p>info@karyaxyloabadi.com<br></p>
-                    </div>
-                </div>
+    <footer class="page-footer dark" id="page-footer" style="background-image: url(&quot;<?= base_url('') ?>assets/img/navbar/gambar-background-kayu-hd.jpg&quot;);">
+        <div class="container text-center">
+            <h4 class="text-white mb-3">Hubungi Kami</h4>
+            <div><i class="fa fa-phone text-white mr-2 mb-2" style="font-size: 22px;height: 24px; width: 24.75px;"></i>
+                <a href="tel:0251-8414-950" class="text-white">0251-8414-950<br></a>
+            </div>
+            <div><i class="fab fa-whatsapp text-white mr-2 mb-2" style="font-size: 22px;height: 24px; width: 24.75px;"></i>
+                <a href="https://web.whatsapp.com/send?phone=6281380030690" class="text-white">0813-8003-0690<br></a>
+            </div>
+            <div><i class="fas fa-mail-bulk text-white mr-2 mb-2" style="font-size: 22px;height: 24px; "></i>
+                <a href="http://karyaxyloabadi@gmail.com" class="text-white">karyaxyloabadi@gmail.com<br></a>
+            </div>
+        </div>
+        <div class="container text-center">
+            <hr>
+            <h5 class="text-white">Pembayaran dapat melalui :</h5>
+            <div class="icon">
+                <img src="<?= base_url('assets/img/e-commerce/bca.png') ?>" style="height: 50px">
+                <img src="<?= base_url('assets/img/e-commerce/bni.png') ?>" style="height: 50px">
             </div>
         </div>
         <div class="footer-copyright">
-            <span>Copyright &copy; CV. Karya Xylo Abadi. All Right Reserved <?= date('Y') ?></span>
+            <span class="text-white">Copyright &copy; CV. Karya Xylo Abadi. All Right Reserved <?= date('Y') ?></span>
         </div>
     </footer>
     <script src="<?= base_url('') ?>assets/js/jquery.min.js"></script>
@@ -38,6 +28,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="<?= base_url('') ?>assets/js/smoothproducts.min.js"></script>
     <script src="<?= base_url('') ?>assets/js/theme.js"></script>
+    <script>
+        var elmnt = document.getElementById("page-footer");
+
+        function scrollToTop() {
+            elmnt.scrollIntoView(true); // Top
+        }
+
+        function scrollToBottom() {
+            elmnt.scrollIntoView(false); // Bottom
+            console.log('bottom');
+        }
+    </script>
     </body>
 
     </html>

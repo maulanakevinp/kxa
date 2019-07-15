@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'mebel',
+	'hostname' => 'www.db4free.net',
+	'username' => 'xylofurniture',
+	'password' => 'xylofurniture',
+	'database' => 'xylofurniture',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

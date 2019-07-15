@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home - Brand</title>
+    <title> <?= $title ?> </title>
     <link rel="stylesheet" href="<?= base_url('') ?>assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="<?= base_url('') ?>assets/fonts/fontawesome-all.min.css">
@@ -23,6 +23,11 @@
     <link href="<?= base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet">
 
     <link rel="icon" href="<?= base_url('') ?>assets/img/navbar/gambar-background-kayu-hd.jpg">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 
 <body>
@@ -35,15 +40,15 @@
                 <div class="navbar-brand-icon rotate-n-15">
                     <i class="fas fa-chair"></i>
                 </div>
-                <div class="navbar-brand-text mx-3">Dream Wood</div>
+                <div class="navbar-brand-text mx-3">Xylo Furniture</div>
             </a>
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
                 <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="<?= base_url('home/contactUs') ?>">Hubungi kami</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="<?= base_url('home/about') ?>">About</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#HubungiKami" onclick="scrollToBottom()">Hubungi kami</a></li>
+                    <li class=" nav-item" role="presentation"><a class="nav-link" href="<?= base_url('home/about') ?>">About</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="<?= base_url('home/client') ?>">Client</a></li>
                 </ul>
             </div>

@@ -8,12 +8,15 @@ class Menu extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
+        $this->load->model('Menu_model', 'menu');
+        $this->load->model('Products_model', 'products');
+        $this->load->model('User_model', 'user');
     }
 
     public function index()
     {
         $data['title'] = 'Menu Management';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->user->getUserByEmail();
 
         $data['menu'] = $this->db->get('user_menu')->result_array();
 
@@ -38,7 +41,6 @@ class Menu extends CI_Controller
     {
         $data['title'] = 'Submenu Management';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $this->load->model('Menu_model', 'menu');
 
         $data['subMenu'] = $this->menu->getSubMenu();
         $data['menu'] = $this->db->get('user_menu')->result_array();
@@ -151,5 +153,19 @@ class Menu extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New product added</div>');
             redirect('menu/product');
         }
+    }
+
+    public function editProduct($id)
+    {
+        $data['title'] = 'Detail Product';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['product'] = $this->db->get_where('products', ['id' => $id])->row_array();
+        $data['categories'] = $this->db->get('categories')->result_array();
+        $data['menu'] = $this->db->get('user_menu')->result_array();
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('menu/edit-product', $data);
+        $this->load->view('templates/footer');
     }
 }

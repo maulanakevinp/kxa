@@ -23,8 +23,9 @@
                 <div class="card">
                     <img src="<?= base_url('assets/img/categories/') . $pr['photo'] ?>" class="card-img-top" style="height: 200px">
                     <div class="card-body">
-                        <h5 class="card-title"><a href="<?= base_url('menu/detailProduct/') . $pr['id'] ?>" class="card-link"><?= $pr['name'] ?></a></h5>
+                        <h5 class="card-title"><a href="<?= base_url('menu/editProduct/') . $pr['id'] ?>" class="card-link"><?= $pr['name'] ?></a></h5>
                         <p class="card-text"><?= $pr['description'] ?></p>
+                        <a href="<?= base_url('menu/deleteProduct/') . $pr['id'] ?>" class="badge badge-danger">delete</a>
                     </div>
                 </div>
             </div>

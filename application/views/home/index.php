@@ -1,8 +1,8 @@
-    <main class="page landing-page">
-        <section class="clean-block slider dark" style="background-color: rgb(255,255,255);">
+    <main class=" landing-page">
+        <section class="clean-block slider dark" style="background-image: url(&quot;<?= base_url('') ?>assets/img/navbar/Light-wood-background.jpg&quot;);">
             <div class="container">
-                <div class="block-heading" style="padding-top: 20px;">
-                    <h2 class="text-info">Dream Wood</h2>
+                <div class="block-heading" style="padding-top: 80px;">
+                    <h2 class="text-white">Xylo Furniture</h2>
                 </div>
                 <div class="carousel slide" data-ride="carousel" id="carousel-1">
                     <div class="carousel-inner" role="listbox">
@@ -23,7 +23,7 @@
             <div class="text">
                 <h2>By CV. Karya Xylo Abadi<br></h2>
                 <p>Kami adalah perusahaan yang bergerak di bidang furniture yang dapat membantu anda mewujudkan design furniture yang anda harapkan , Setiap produk kami buat sendiri dengan penuh ketelitian, demi menjamin kualitas , sesuai dengan moto kami
-                    “ Make You’re design come true” .<br></p><button class="btn btn-outline-light btn-lg" type="button">Learn More</button>
+                    “ Make You’re design come true”</p>
             </div>
         </section>
         <section class="clean-block clean-info dark">
