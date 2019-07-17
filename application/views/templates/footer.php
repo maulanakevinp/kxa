@@ -53,11 +53,10 @@
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
-        $('.form-check-input').on('click', function() {
 
+        $('.form-check-input').on('click', function() {
             const menuId = $(this).data('menu');
             const roleId = $(this).data('role');
-
             $.ajax({
                 url: "<?= base_url('admin/changeaccess'); ?>",
                 type: 'post',
@@ -69,8 +68,8 @@
                     document.location.href = "<?= base_url('admin/roleaccess/'); ?>" + roleId;
                 }
             });
-
         });
+
     });
 </script>
 

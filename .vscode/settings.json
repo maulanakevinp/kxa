@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/c1bf082e-937e-48db-bde1-c2ade4796dd7/resourceGroups/mkevinp/providers/Microsoft.Web/sites/mkevinp",
+    "appService.deploySubpath": ""
+}
