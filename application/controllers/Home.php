@@ -11,7 +11,7 @@ class Home extends CI_Controller
     }
     public function index()
     {
-        $data['title'] = 'Home - Karya Xylo Abadi';
+        $data['title'] = 'Xylo Official Mebel';
         $data['photo'] = $this->products->getHomePicture();
         $data['company'] = $this->menu->getCompany();
 

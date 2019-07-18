@@ -16,6 +16,10 @@ class Products_model extends CI_Model
 
     public function getProductById($id)
     {
+        // $query = "SELECT p.id as id , p.name as name , 
+        //             FROM product p JOIN categories c ON p.category_id = c.id
+        //             WHERE p.id = $id";
+
         return $this->db->get_where('products', ['id' => $id])->row_array();
     }
 
@@ -168,7 +172,7 @@ class Products_model extends CI_Model
     {
         if ($keyword) {
             $this->db->like('name', $keyword);
-            // $this->db->or_like('email', $keyword);
+            $this->db->or_like('description', $keyword);
         }
         return $this->db->get('products', $limit, $start)->result_array();
     }
@@ -182,7 +186,7 @@ class Products_model extends CI_Model
     {
         if ($keyword) {
             $this->db->like('name', $keyword);
-            // $this->db->or_like('email', $keyword);
+            $this->db->or_like('description', $keyword);
         }
         $this->db->where('category_id', $category_id);
         return $this->db->get('products', $limit, $start)->result_array();

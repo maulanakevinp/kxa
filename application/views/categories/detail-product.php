@@ -1,8 +1,16 @@
     <main>
-        <section class="clean-block slider dark" style="background-image: url(&quot;<?= base_url('') ?>assets/img/navbar/Light-wood-background.jpg&quot;);">
-            <div class="container">
-                <div class="block-heading" style="padding-top: 80px;">
-                    <h2 class="text-white"><?= $title ?></h2>
+        <section class="clean-block ">
+            <div class="container pt-4">
+                <nav aria-label="breadcrumb" style="margin-top: 80px;">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?= base_url('') ?>">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<?= base_url('categories') ?>">Kategori</a></li>
+                        <li class="breadcrumb-item"><a href="<?= base_url('categories/' . $categories['function']) ?>"><?= $categories['category'] ?></a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><?= $title ?></li>
+                    </ol>
+                </nav>
+                <div class="text-center">
+                    <h2 class=" "><?= $title ?></h2>
                 </div>
                 <div class="carousel slide" data-ride="carousel" id="carousel-1">
                     <div class="carousel-inner text-center" role="listbox">

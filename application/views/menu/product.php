@@ -20,9 +20,9 @@
                 <option value="all">Category</option>
                 <?php $i = 1;
                 foreach ($categories as $cat) : ?>
-                                        <option value="<?= $i ?>"><?= $cat['category'] ?></option>
-                                        <?php $i++;
-                                    endforeach ?>
+                                                                    <option value="<?= $i ?>"><?= $cat['category'] ?></option>
+                                                                    <?php $i++;
+                                                                endforeach ?>
             </select> -->
         </div>
         <div class="col-md-6">
@@ -38,7 +38,7 @@
     </div>
     <div class="row">
         <?php foreach ($product as $pr) : ?>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
                 <div class="card">
                     <img src="<?= base_url('assets/img/categories/') . $pr['photo1'] ?>" class="card-img-top" style="height: 200px">
                     <div class="card-body">
