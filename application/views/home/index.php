@@ -28,25 +28,19 @@
                 <div class="block-heading">
                     <h2 class="text-info">Silahkan Pilih Kategori</h2>
                 </div>
-                <div class="card-columns text-center" style="margin: 0 auto;">
-                    <div class="card" style="padding: 10px;"><img class="card-img-top w-100 d-block" style="height: 200px;width: 100%;" src="<?= base_url('') ?>assets/img/categories/interior-3530343_640.jpg">
-                        <div class="card-body text-center"><a class="card-link" href="<?= base_url('categories/livingroom') ?>" style="font-size: 20px;">Ruang Tamu</a></div>
-                    </div>
-                    <div class="card" style="padding: 10px;"><img class="card-img-top w-100 d-block" style="height: 200px;" src="<?= base_url('') ?>assets/img/categories/kitchen-4139216_640.jpg">
-                        <div class="card-body text-center"><a class="card-link" href="<?= base_url('categories/diningroom') ?>" style="font-size: 20px;">Ruang Makan</a></div>
-                    </div>
-                    <div class="card" style="padding: 10px;"><img class="card-img-top w-100 d-block" style="height: 200px;" src="<?= base_url('') ?>assets/img/categories/interior-4154353_640.jpg">
-                        <div class="card-body text-center"><a class="card-link" href="<?= base_url('categories/workspace') ?>" style="font-size: 20px;">Ruang Kerja</a></div>
-                    </div>
-                    <div class="card" style="padding: 10px;"><img class="card-img-top w-100 d-block" style="height: 200px;" src="<?= base_url('') ?>assets/img/categories/bath-4132300_640.png">
-                        <div class="card-body text-center"><a class="card-link" href="<?= base_url('categories/hoteldecoration') ?>" style="font-size: 20px;">Dekorasi Hotel &amp; Restoran</a></div>
-                    </div>
-                    <div class="card" style="padding: 10px;"><img class="card-img-top w-100 d-block" style="height: 200px;" src="<?= base_url('') ?>assets/img/categories/interior-3538020_640.jpg">
-                        <div class="card-body text-center"><a class="card-link" href="<?= base_url('categories/bedroom') ?>" style="font-size: 20px;">Ruang Tidur</a></div>
-                    </div>
-                    <div class="card" style="padding: 10px;"><img class="card-img-top w-100 d-block" style="height: 200px;" src="<?= base_url('') ?>assets/img/categories/decoration-4130933_640.jpg">
-                        <div class="card-body text-center"><a class="card-link" href="<?= base_url('categories/homedecoration') ?>" style="font-size: 20px;">Dekorasi Rumah</a></div>
-                    </div>
+                <div class="row">
+                    <?php foreach ($category as $c) : ?>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
+                            <a class="card-link" href="<?= base_url('h/category/' . $c['id']) ?>" style="font-size: 20px;">
+                                <div class="card">
+                                    <img class="card-img-top" style="height: 200px" src="<?= base_url('assets/img/categories/' . $c['photo']) ?>">
+                                    <div class="card-body text-center">
+                                        <h5><?= $c['category'] ?></h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    <?php endforeach ?>
                 </div>
             </div>
         </section>
@@ -110,5 +104,6 @@
                 <h2 class="text-center">Alamat</h2>
                 <p class="text-center"><?= $company['address'] ?> <br>Telp : <?= $company['number_phone'] ?></p>
             </div>
-        </div><?= $company['maps'] ?>
+        </div>
+        <iframe src="<?= $company['maps'] ?>" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
     </div>

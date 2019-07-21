@@ -59,6 +59,10 @@ class Menu_model extends CI_Model
         ];
 
         $this->db->where('id', 1);
-        $this->db->update('company', $data);
+        if ($this->db->update('company', $data)) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Company has been changed</div>');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Company has not been changed</div>');
+        }
     }
 }

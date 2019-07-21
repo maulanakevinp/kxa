@@ -11,31 +11,25 @@
                     <?= validation_errors() ?>
                 </div>
             <?php endif; ?>
+            <?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>') ?>
             <?= $this->session->flashdata('message'); ?>
-            <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubMenuModal">Add New Submenu</a>
+            <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubMenuModal">Add New Type</a>
 
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Menu</th>
-                        <th scope="col">Url</th>
-                        <th scope="col">Icon</th>
-                        <th scope="col">Active</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Type</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $i = 1; ?>
-                    <?php foreach ($subMenu as $sm) : ?>
+                    <?php foreach ($type as $t) : ?>
                         <tr>
                             <th scope="row"><?= $i ?></th>
-                            <td><?= $sm['title'] ?></td>
-                            <td><?= $sm['menu'] ?></td>
-                            <td><?= $sm['url'] ?></td>
-                            <td><?= $sm['icon'] ?></td>
-                            <td><?= $sm['is_active'] ?></td>
+                            <td><?= $t['category'] ?></td>
+                            <td><?= $t['type'] ?></td>
                             <td>
                                 <a href=""><span class="badge badge-success">edit</span></a>
                                 <a href=""><span class="badge badge-danger">delete</span></a>

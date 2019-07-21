@@ -64,7 +64,87 @@ class Menu extends CI_Controller
         $data['title'] = 'Product';
         $data['user'] = $this->user->getUserByEmail();
         $data['menu'] = $this->menu->getAllMenu();
-        $data['categories'] = $this->products->getAllCategories();
+        $data['category'] = $this->products->getAllCategory();
+
+        $config['total_rows'] = $this->db->count_all_results();
+        $data['total_rows'] = $config['total_rows'];
+        $config['per_page'] = 20;
+        $config['base_url'] = 'http://localhost/kxa/menu/product';
+
+        $this->pagination->initialize($config);
+
+        $data['start'] = $this->uri->segment(3);
+        $data['product'] = $this->products->getProduct($config['per_page'], $data['start']);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('menu/product', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function productByCategory($category_id)
+    {
+        $data['title'] = 'Product';
+        $data['user'] = $this->user->getUserByEmail();
+        $data['menu'] = $this->menu->getAllMenu();
+        $data['category'] = $this->products->getAllCategory();
+        $data['type'] = $this->products->getType($category_id);
+
+        $config['total_rows'] = $this->db->count_all_results();
+        $data['total_rows'] = $config['total_rows'];
+        $config['per_page'] = 20;
+        $config['base_url'] = 'http://localhost/kxa/menu/product/' . $category_id;
+
+        $this->pagination->initialize($config);
+        if ($this->uri->segment(4) != null) {
+            $data['start'] = $this->uri->segment(4);
+        } else {
+            $data['start'] = 0;
+        }
+        $data['product'] = $this->products->getProductByCategory($category_id, $config['per_page'], $data['start']);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('menu/product', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function productByType($category_id, $type_id)
+    {
+        $data['title'] = 'Product';
+        $data['user'] = $this->user->getUserByEmail();
+        $data['menu'] = $this->menu->getAllMenu();
+        $data['category'] = $this->products->getAllCategory();
+        $data['type'] = $this->products->getType($category_id);
+
+        $config['total_rows'] = $this->db->count_all_results();
+        $data['total_rows'] = $config['total_rows'];
+        $config['per_page'] = 20;
+        $config['base_url'] = 'http://localhost/kxa/menu/product/' . $category_id . '/' . $type_id;
+
+        $this->pagination->initialize($config);
+        if ($this->uri->segment(5) != null) {
+            $data['start'] = $this->uri->segment(5);
+        } else {
+            $data['start'] = 0;
+        }
+        $data['product'] = $this->products->getProductByType($type_id, $config['per_page'], $data['start']);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('menu/product', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function searchProduct()
+    {
+        $data['title'] = 'Search Product';
+        $data['user'] = $this->user->getUserByEmail();
+        $data['menu'] = $this->menu->getAllMenu();
+        $data['category'] = $this->products->getAllCategory();
 
         if ($this->input->post('submit')) {
             $data['keyword'] = $this->input->post('keyword');
@@ -75,11 +155,11 @@ class Menu extends CI_Controller
 
         $this->db->like('name', $data['keyword']);
         // $this->db->or_like('email', $data['keyword']);
-        $this->db->from('products');
+        $this->db->from('product');
         $config['total_rows'] = $this->db->count_all_results();
         $data['total_rows'] = $config['total_rows'];
         $config['per_page'] = 20;
-        $config['base_url'] = 'http://localhost/kxa/menu/product';
+        $config['base_url'] = 'http://localhost/kxa/menu/searchProduct';
 
         $this->pagination->initialize($config);
 
@@ -98,11 +178,12 @@ class Menu extends CI_Controller
         $data['title'] = 'Add New Product';
         $data['user'] = $this->user->getUserByEmail();
         $data['menu'] = $this->menu->getAllMenu();
-        $data['categories'] = $this->products->getAllCategories();
+        $data['category'] = $this->products->getAllCategory();
 
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('category', 'Category', 'required|trim');
-        $this->form_validation->set_rules('unit_price', 'Unit Price', 'required|trim|numeric');
+        $this->form_validation->set_rules('type', 'Type', 'required|trim');
+        $this->form_validation->set_rules('price', 'Price', 'required|trim|numeric');
 
         if (empty($_FILES['photo1']['name'])) {
             $this->form_validation->set_rules('photo1', 'Photo', 'required');
@@ -116,7 +197,6 @@ class Menu extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->products->insertProduct();
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New product added</div>');
             redirect('menu/product');
         }
     }
@@ -127,13 +207,14 @@ class Menu extends CI_Controller
         $data['user'] = $this->user->getUserByEmail();
         $data['product'] = $this->products->getProductById($id);
         $data['photo'] = $this->products->getPhotoByPhoto($data['product']['photo1']);
-        $data['categories'] = $this->products->getAllCategories();
+        $data['categories'] = $this->products->getAllCategory();
         $data['category'] = $this->products->getCategoryById($data['product']['category_id']);
         $data['menu'] = $this->menu->getAllMenu();
+        $data['type'] = $this->products->getType($data['product']['category_id']);
 
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('category', 'Category', 'required|trim');
-        $this->form_validation->set_rules('unit_price', 'Unit Price', 'required|trim|numeric');
+        $this->form_validation->set_rules('price', 'Price', 'required|trim|numeric');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -143,7 +224,6 @@ class Menu extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->products->updateProduct($id);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Product has been changed</div>');
             redirect('menu/editProduct/' . $id);
         }
     }
@@ -151,27 +231,19 @@ class Menu extends CI_Controller
     public function updateImage($id, $i, $photo)
     {
         $this->products->updateImage($i, $photo);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Photo has been updated</div>');
         redirect('menu/editProduct/' . $id);
     }
 
     public function deleteProduct($id, $photo)
     {
         $this->products->deleteProduct($id, $photo);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Product has been deleted</div>');
         redirect('menu/product');
     }
 
     public function deleteImage($id, $i, $photo)
     {
         $this->products->deleteImage($i, $photo);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Photo has been deleted</div>');
         redirect('menu/editProduct/' . $id);
-    }
-    public function category()
-    {
-        $category_id = $this->input->post('categoryId');
-        $this->products->category($category_id);
     }
 
     public function homePicture()
@@ -189,8 +261,7 @@ class Menu extends CI_Controller
             $this->load->view('menu/home-picture', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->products->updateImage();
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Product has been changed</div>');
+            $this->products->updatePicture();
             redirect('menu/homePicture');
         }
     }
@@ -198,14 +269,12 @@ class Menu extends CI_Controller
     public function editPicture($i, $photo)
     {
         $this->products->updatePicture($i, $photo);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Product has been changed</div>');
         redirect('menu/homePicture');
     }
 
     public function deletePicture($i, $photo)
     {
         $this->products->deletePicture($i, $photo);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Photo has been deleted</div>');
         redirect('menu/homePicture/');
     }
 
@@ -218,6 +287,16 @@ class Menu extends CI_Controller
 
         $this->form_validation->set_rules('company_name', 'Company Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+        $this->form_validation->set_rules('number_phone', 'Number Phone', 'trim');
+        $this->form_validation->set_rules('number_whatsapp', 'Number Whatsapp', 'trim');
+        $this->form_validation->set_rules('descriptioin', 'Descriptioin', 'trim');
+        $this->form_validation->set_rules('address', 'Address', 'trim');
+        $this->form_validation->set_rules('bukalapak', 'Bukalapak', 'trim');
+        $this->form_validation->set_rules('tokopedia', 'Tokopedia', 'trim');
+        $this->form_validation->set_rules('olx', 'OLX', 'trim');
+        $this->form_validation->set_rules('whatsapp', 'WhatsApp', 'trim');
+        $this->form_validation->set_rules('line', 'Line', 'trim');
+        $this->form_validation->set_rules('maps', 'Maps', 'trim');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -227,8 +306,96 @@ class Menu extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->menu->updateCompany();
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Company has been changed</div>');
             redirect('menu/company');
         }
+    }
+
+    public function categoryId()
+    {
+        $id = $this->input->post('id');
+        $type = $this->products->getType($id);
+
+        echo "<option value=''> Select Type </option>";
+        foreach ($type as $t) {
+            if (condition) {
+                # code...
+            }
+            echo "<option value='" . $t['id'] . "'>" . $t['type'] . "</option>";
+        }
+    }
+
+    public function category()
+    {
+        $data['title'] = 'Category';
+        $data['user'] = $this->user->getUserByEmail();
+        $data['category'] = $this->products->getAllCategory();
+        $data['menu'] = $this->menu->getAllMenu();
+
+        $this->form_validation->set_rules('category', 'Category', 'required|trim');
+        if (empty($_FILES['photo']['name'])) {
+            $this->form_validation->set_rules('photo', 'Photo', 'required|trim');
+        }
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('menu/category', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->products->insertCategory();
+            redirect('menu/category');
+        }
+    }
+
+    public function editCategory($id)
+    {
+        $data['title'] = 'Edit Category';
+        $data['user'] = $this->user->getUserByEmail();
+        $data['category'] = $this->products->getCategoryById($id);
+        $data['menu'] = $this->menu->getAllMenu();
+        $data['type'] = $this->products->getType($id);
+
+        $this->form_validation->set_rules('category', 'Category', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('menu/edit-category', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->products->updateCategory($id);
+            redirect('menu/editCategory/' . $id);
+        }
+    }
+
+    public function deleteCategory($id)
+    {
+        $this->products->deleteCategory($id);
+        redirect('menu/category');
+    }
+
+    public function addType($category_id)
+    {
+        $this->products->insertType($category_id);
+        redirect('menu/editCategory/' . $category_id);
+    }
+
+    public function editType($category_id, $id)
+    {
+        $this->products->updateType($id);
+        redirect('menu/editCategory/' . $category_id);
+    }
+
+    public function deleteType($category_id, $id)
+    {
+        $this->products->deleteType($id);
+        redirect('menu/editCategory/' . $category_id);
+    }
+
+    public function getType()
+    {
+        echo json_encode($this->products->getTypeById($this->input->post('id')));
     }
 }

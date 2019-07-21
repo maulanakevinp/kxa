@@ -4,30 +4,32 @@
                 <nav aria-label="breadcrumb" style="margin-top: 80px;">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= base_url('') ?>">Home</a></li>
-                        <li class="breadcrumb-item"><a href="<?= base_url('categories') ?>">Kategori</a></li>
-                        <li class="breadcrumb-item"><a href="<?= base_url('categories/' . $categories['function']) ?>"><?= $categories['category'] ?></a></li>
+                        <li class="breadcrumb-item"><a href="<?= base_url('h/category/' . $product['category_id']) ?>"><?= $product['category'] ?></a></li>
+                        <li class="breadcrumb-item"><a href="<?= base_url('h/type/' . $product['category_id']) . '/' . $product['type_id'] ?>"><?= $product['type'] ?></a></li>
                         <li class="breadcrumb-item active" aria-current="page"><?= $title ?></li>
                     </ol>
                 </nav>
-                <div class="text-center">
-                    <h2 class=" "><?= $title ?></h2>
-                </div>
-                <div class="carousel slide" data-ride="carousel" id="carousel-1">
-                    <div class="carousel-inner text-center" role="listbox">
-                        <div class="carousel-item active "><img class="mw-100" src="<?= base_url('') ?>assets/img/categories/<?= $photo['photo1'] ?>" alt="Slide Image"></div>
-                        <?php for ($i = 2; $i <= 6; $i++) {
-                            if (!empty($photo['photo' . $i])) { ?>
-                                <div class="carousel-item"><img class="mw-100" src="<?= base_url('') ?>assets/img/categories/<?= $photo['photo' . $i] ?>" alt="Slide Image"></div>
-                            <?php }
-                        } ?>
+                <div class="content p-5">
+                    <div class="text-center mb-5">
+                        <h2 class=" "><?= $title ?></h2>
                     </div>
-                    <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+                    <div class="carousel slide" data-ride="carousel" id="carousel-1">
+                        <div class="carousel-inner text-center" role="listbox">
+                            <div class="carousel-item active "><img class="mw-100" src="<?= base_url('') ?>assets/img/products/<?= $product['photo1'] ?>" alt="Slide Image"></div>
+                            <?php for ($i = 2; $i <= 6; $i++) {
+                                if (!empty($product['photo' . $i])) { ?>
+                                    <div class="carousel-item"><img class="mw-100" src="<?= base_url('') ?>assets/img/products/<?= $product['photo' . $i] ?>" alt="Slide Image"></div>
+                                <?php }
+                            } ?>
+                        </div>
+                        <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+                    </div>
                 </div>
             </div>
         </section>
         <section class="clean-block clean-hero" style="background-image: url(&quot;<?= base_url('') ?>assets/img/navbar/gambar-background-kayu-hd.jpg&quot;);color: rgba(9,162,255,0.24);">
             <div class="text">
-                <h2>Rp. <?= number_format($product['unit_price'], 2, ',', '.') ?><br></h2>
+                <h2>Rp. <?= number_format($product['price'], 2, ',', '.') ?><br></h2>
                 <p><?= $product['description'] ?></p>
             </div>
         </section>

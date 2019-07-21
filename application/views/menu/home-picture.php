@@ -17,7 +17,7 @@
                     <?php if ($i > 1) { ?>
                         <a href="<?= base_url('menu/deletePicture/' . $i . '/' . $photo['photo1'])  ?>" onclick="return confirm('Are you sure want to DELETE this photo ?');" class="btn btn-danger btn-block mb-1">Delete Photo</a>
                     <?php } ?>
-                <?php } else if (empty($photo['photo'])) { ?>
+                <?php } else if (empty($photo['photo' . $i])) { ?>
                     <img class="mb-1" src="<?= base_url('assets/img/noimage.jpg') ?>" width="100%" height="250px">
                 <?php } ?>
                 <form action="<?= base_url('menu/editPicture/' . $i . '/' . $photo['photo1']) ?>" method="post" enctype="multipart/form-data">

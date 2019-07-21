@@ -48,12 +48,45 @@
 <!-- Custom scripts for all pages-->
 <script src="<?= base_url('assets/') ?>js/sb-admin-2.min.js"></script>
 <script>
-    $(function() {
+    $(document).ready(function() {
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
-
+        $("#category").on("change", function() {
+            const category_id = $(this).val();
+            if (category_id != '') {
+                $.ajax({
+                    url: '<?= base_url('menu/categoryid') ?>',
+                    type: 'post',
+                    data: {
+                        id: category_id
+                    },
+                    success: function(data) {
+                        $("#type").html(data);
+                    }
+                });
+            } else {
+                $("#type").html('<option value=""> Select Type </option>');
+            }
+        });
+        $("#categorySearch").on("change", function() {
+            const category_id = $(this).val();
+            if (category_id != '') {
+                document.location.href = "<?= base_url('menu/productByCategory/'); ?>" + category_id;
+            } else {
+                document.location.href = "<?= base_url('menu/product'); ?>";
+            }
+        });
+        $("#typeSearch").on("change", function() {
+            const category_id = $("#categorySearch").val();
+            const type_id = $(this).val();
+            if (type_id != '') {
+                document.location.href = "<?= base_url('menu/productByType/'); ?>" + category_id + "/" + type_id;
+            } else {
+                document.location.href = "<?= base_url('menu/productByCategory/'); ?>" + category_id;
+            }
+        });
         $('.form-check-input').on('click', function() {
             const menuId = $(this).data('menu');
             const roleId = $(this).data('role');
@@ -69,7 +102,31 @@
                 }
             });
         });
+        $('.addTypeModal').on('click', function() {
+            $('#TypeModalLabel').html('Add New Type');
+            $('.modal-footer button[type=submit]').html('Add Type');
+        });
 
+        $('.editTypeModal').on('click', function() {
+            const id = $(this).data('id');
+            const url = $(this).data('url');
+            $('#TypeModalLabel').html('Edit Type');
+            $('.modal-footer button[type=submit]').html('Edit Type');
+            $('#form').attr('action', '<?= base_url('menu/editType/') ?>' + url + '/' + id);
+
+            $.ajax({
+                url: '<?= base_url('menu/getType') ?>',
+                data: {
+                    id: id
+                },
+                method: 'post',
+                dataType: 'json',
+                success: function(data) {
+                    $('#type').val(data.type);
+                }
+            });
+
+        });
     });
 </script>
 

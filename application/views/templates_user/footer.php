@@ -2,13 +2,13 @@
         <div class="container text-center">
             <h4 class="text-white mb-3">Hubungi Kami</h4>
             <div><i class="fa fa-phone text-white mr-2 mb-2" style="font-size: 22px;height: 24px; width: 24.75px;"></i>
-                <a href="tel:<?= $company['number_phone'] ?>" class="text-white"><?= $company['number_phone'] ?><br></a>
+                <a href="tel:<?= $company['number_phone'] ?>" target="_blank" class="text-white"><?= $company['number_phone'] ?><br></a>
             </div>
             <div><i class="fab fa-whatsapp text-white mr-2 mb-2" style="font-size: 22px;height: 24px; width: 24.75px;"></i>
-                <a href="<?= $company['whatsapp'] ?>" class="text-white"><?= $company['number_wa'] ?><br></a>
+                <a href="<?= $company['whatsapp'] ?>" target="_blank" class="text-white"><?= $company['number_wa'] ?><br></a>
             </div>
             <div><i class="fas fa-mail-bulk text-white mr-2 mb-2" style="font-size: 22px;height: 24px; "></i>
-                <a href="http://<?= $company['email'] ?>" class="text-white"><?= $company['email'] ?><br></a>
+                <a href="http://<?= $company['email'] ?>" target="_blank" class="text-white"><?= $company['email'] ?><br></a>
             </div>
         </div>
         <div class="container text-center">
@@ -29,16 +29,30 @@
     <script src="<?= base_url('') ?>assets/js/smoothproducts.min.js"></script>
     <script src="<?= base_url('') ?>assets/js/theme.js"></script>
     <script>
-        var elmnt = document.getElementById("page-footer");
-
-        function scrollToTop() {
-            elmnt.scrollIntoView(true); // Top
-        }
-
-        function scrollToBottom() {
-            elmnt.scrollIntoView(false); // Bottom
-            console.log('bottom');
-        }
+        $(document).ready(function() {
+            $("#categorySearch").on("change", function() {
+                const category_id = $(this).val();
+                if (category_id != '') {
+                    document.location.href = "<?= base_url('h/category/'); ?>" + category_id;
+                } else {
+                    document.location.href = "<?= base_url('h/product'); ?>";
+                }
+            });
+            $("#typeSearch").on("change", function() {
+                const category_id = $("#categorySearch").val();
+                const type_id = $(this).val();
+                if (type_id != '') {
+                    document.location.href = "<?= base_url('h/type/'); ?>" + category_id + "/" + type_id;
+                } else {
+                    document.location.href = "<?= base_url('h/category/'); ?>" + category_id;
+                }
+            });
+            $("#contact-us").click(function() {
+                $('html, body').animate({
+                    scrollTop: $(".page-footer").offset().top
+                }, 100);
+            });
+        });
     </script>
     </body>
 

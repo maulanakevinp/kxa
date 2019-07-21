@@ -47,9 +47,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#HubungiKami" onclick="scrollToBottom()">Hubungi kami</a></li>
-                    <li class=" nav-item" role="presentation"><a class="nav-link" href="<?= base_url('home/about') ?>">About</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="<?= base_url('home/client') ?>">Client</a></li>
+                    <li id="contact-us" class="nav-item" role="presentation"><a class="nav-link" href="#">Hubungi kami</a></li>
+                    <li class=" nav-item" role="presentation"><a class="nav-link" href="<?= base_url('h/about') ?>">About</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="<?= base_url('h/client') ?>">Client</a></li>
                 </ul>
             </div>
         </div>
